@@ -127,13 +127,43 @@ class FlutterBasics extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(height: 24),
+
+          const Text(
+            'For the set up I downloaded the flutter extension of Vs code and downloaded the SDK because Andriod studio makes my PC slow'
+            ,
+            style: TextStyle(
+              fontSize: 16
+              ),
+          ),
+          const SizedBox(height: 24),
+          const Text(
+            'TABS',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 16),
+          const Text(
+            'Flutter uses TabBarView widget to display multiple screens, These are parts of the UI that navigate the user through different routes'
+            ,
+            style: TextStyle(
+              fontSize: 16
+            ),
+  
+            ),
+            const SizedBox(height: 24),
+            const Text(
+            '* I have used TabBarView to display my different screens',
+            style: TextStyle(fontSize: 16),
+          ),
+
+
         ],
       ),
     );
   }
 }
 
-// First Tab: Demonstration of Stateless Widgets
+// Demonstration of Stateless Widgets
 class StatelessWidgetExample extends StatelessWidget {
   const StatelessWidgetExample({super.key});
 
