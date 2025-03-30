@@ -1,46 +1,485 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  runApp(const MyApp());
+}
 
-// MyApp is the root widget of the application
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: HomePage(),
+    return MaterialApp(
+      title: 'Precious Research',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        useMaterial3: true,
+      ),
+      home: const MyHomePage(title: 'Precious Research'),
     );
   }
 }
 
-// HomePage is the main screen of the app
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+
+  final String title;
 
   @override
-  _HomePageState createState() => _HomePageState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+  
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 4, vsync: this);
+  }
+  
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // Set the background color of the app bar
-        backgroundColor: Colors.green,
-        // Set the title of the app bar
-        title: const Text("GeeksforGeeks"),
+        backgroundColor: Colors.white,
+        title: Text(
+          widget.title,
+          style: const TextStyle(
+            fontFamily:'Roboto',
+            color: Colors.blue,
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+          )
+          ),
+        bottom: TabBar(
+          controller: _tabController,
+          tabs: const [
+            Tab(icon: Icon(Icons.flutter_dash), text: "Flutter basics"),
+            Tab(icon: Icon(Icons.home), text: "Stateless"),
+            Tab(icon: Icon(Icons.sync), text: "Stateful"),
+            Tab(icon: Icon(Icons.list), text: "Layout"),
+          ],
+        ),
       ),
-      // The main body of the scaffold
-      body: const Center(
-        // Display a centered text widget
+      body: TabBarView(
+        controller: _tabController,
+        children: const [
+          FlutterBasics(),
+          StatelessWidgetExample(),
+          StatefulWidgetExample(),
+          LayoutWidgetsExample(),
+        ],
+      ),
+    );
+  }
+}
+
+//introduction to flutter
+class FlutterBasics extends StatelessWidget {
+  const FlutterBasics({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Introduction to Flutter',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 16),
+          const Text(
+            'Flutter is Google\'s mobile SDK that builds native Andriod and ios apps from a single codebase using Dart programming language.',
+            style: TextStyle(fontSize: 16),
+          ),
+          const SizedBox(height: 24),
+          Card(
+            elevation: 4,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Key Advantages of Flutter', 
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 8),
+                  const Text('1. Cross-platform development: Write once, run anywhere (iOS, Android, Web, Desktop)'),
+                  const SizedBox(height: 8),
+                  const Text('2. Hot reload: Instantly see changes without restarting your app'),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Icon(Icons.info, color: Colors.blue.shade700),
+                      const SizedBox(width: 8),
+                      const Text('Used by Google, Alibaba, BMW, eBay and more'),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// First Tab: Demonstration of Stateless Widgets
+class StatelessWidgetExample extends StatelessWidget {
+  const StatelessWidgetExample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Stateless Widgets',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 16),
+          const Text(
+            'Stateless widgets are immutable and their properties can\'t change over time.',
+            style: TextStyle(fontSize: 16),
+          ),
+          const SizedBox(height: 24),
+          Card(
+            elevation: 4,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Simple Card Widget', 
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 8),
+                  const Text('This is a card with static content that doesn\'t change.'),
+                  const SizedBox(height: 16),
+                  Row(
+                    children: [
+                      Icon(Icons.info, color: Colors.blue.shade700),
+                      const SizedBox(width: 8),
+                      const Text('Informational content'),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 24),
+          const CustomStatelessWidget(
+            title: 'Custom Stateless Widget',
+            description: 'This is a reusable component with properties.',
+            iconData: Icons.star,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// Custom Stateless Widget Example
+class CustomStatelessWidget extends StatelessWidget {
+  final String title;
+  final String description;
+  final IconData iconData;
+  
+  const CustomStatelessWidget({
+    super.key, 
+    required this.title, 
+    required this.description, 
+    required this.iconData
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(iconData, color: Colors.orange),
+              const SizedBox(width: 8),
+              Text(title, style: const TextStyle(
+                fontSize: 18, 
+                fontWeight: FontWeight.bold
+              )),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(description),
+        ],
+      ),
+    );
+  }
+}
+
+// Second Tab: Demonstration of Stateful Widgets
+class StatefulWidgetExample extends StatefulWidget {
+  const StatefulWidgetExample({super.key});
+
+  @override
+  State<StatefulWidgetExample> createState() => _StatefulWidgetExampleState();
+}
+
+class _StatefulWidgetExampleState extends State<StatefulWidgetExample> {
+  int _counter = 0;
+  bool _isToggled = false;
+  double _sliderValue = 0.5;
+  
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Stateful Widgets',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 16),
+          const Text(
+            'Stateful widgets can change their state over time in response to user actions or events.',
+            style: TextStyle(fontSize: 16),
+          ),
+          const SizedBox(height: 24),
+          Card(
+            elevation: 4,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  const Text('Counter Example', 
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 16),
+                  Text(
+                    'Count: $_counter',
+                    style: const TextStyle(fontSize: 24),
+                  ),
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: _incrementCounter,
+                    child: const Text('Increment'),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 24),
+          Card(
+            elevation: 4,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Interactive Controls', 
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 16),
+                  Row(
+                    children: [
+                      const Text('Toggle:'),
+                      const SizedBox(width: 8),
+                      Switch(
+                        value: _isToggled,
+                        onChanged: (value) {
+                          setState(() {
+                            _isToggled = value;
+                          });
+                        },
+                      ),
+                      const SizedBox(width: 16),
+                      Text(_isToggled ? 'ON' : 'OFF'),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    children: [
+                      const Text('Slider:'),
+                      Expanded(
+                        child: Slider(
+                          value: _sliderValue,
+                          onChanged: (value) {
+                            setState(() {
+                              _sliderValue = value;
+                            });
+                          },
+                        ),
+                      ),
+                      Text('${(_sliderValue * 100).round()}%'),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// Third Tab: Layout Widgets Examples
+class LayoutWidgetsExample extends StatelessWidget {
+  const LayoutWidgetsExample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Layout Widgets',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              'Layout widgets help arrange other widgets on the screen.',
+              style: TextStyle(fontSize: 16),
+            ),
+            const SizedBox(height: 24),
+            const Text('Row Example:', 
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            Container(
+              margin: const EdgeInsets.only(top: 8, bottom: 16),
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade200,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  _buildColoredBox(Colors.red),
+                  _buildColoredBox(Colors.green),
+                  _buildColoredBox(Colors.blue),
+                ],
+              ),
+            ),
+            const Text('Column Example:', 
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            Container(
+              margin: const EdgeInsets.only(top: 8, bottom: 16),
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade200,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              height: 200,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  _buildColoredBox(Colors.purple),
+                  _buildColoredBox(Colors.orange),
+                  _buildColoredBox(Colors.teal),
+                ],
+              ),
+            ),
+            const Text('Stack Example:', 
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            Container(
+              margin: const EdgeInsets.only(top: 8, bottom: 16),
+              height: 100,
+              child: Stack(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    height: 100,
+                    color: Colors.amber,
+                  ),
+                  Positioned(
+                    left: 20,
+                    top: 20,
+                    child: Container(
+                      width: 60,
+                      height: 60,
+                      color: Colors.red.withOpacity(0.7),
+                    ),
+                  ),
+                  Positioned(
+                    right: 40,
+                    bottom: 10,
+                    child: Container(
+                      width: 50,
+                      height: 50,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Text('GridView Example:', 
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            Container(
+              margin: const EdgeInsets.only(top: 8),
+              height: 200,
+              child: GridView.count(
+                crossAxisCount: 3,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                children: [
+                  _buildGridItem(Colors.red, 'Item 1'),
+                  _buildGridItem(Colors.green, 'Item 2'),
+                  _buildGridItem(Colors.blue, 'Item 3'),
+                  _buildGridItem(Colors.yellow, 'Item 4'),
+                  _buildGridItem(Colors.purple, 'Item 5'),
+                  _buildGridItem(Colors.teal, 'Item 6'),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+  
+  Widget _buildColoredBox(Color color) {
+    return Container(
+      width: 50,
+      height: 50,
+      color: color,
+    );
+  }
+  
+  Widget _buildGridItem(Color color, String text) {
+    return Container(
+      color: color,
+      child: Center(
         child: Text(
-          "Hello Geeks!!",
-          // Apply text styling
-          style: TextStyle(
-            fontSize: 24,          // Set font size
-            fontWeight: FontWeight.bold, // Set font weight
+          text,
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
