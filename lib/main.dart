@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Precious Research'),
+      home: const MyHomePage(title: 'Precious\'s Research'),
     );
   }
 }
@@ -49,15 +49,33 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text(
-          widget.title,
+  title: Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,  // This spaces out the title and button
+    children: [
+      Text(
+        widget.title,
+        style: const TextStyle(
+          fontFamily:'Roboto',
+          color: Colors.blue,
+          fontWeight: FontWeight.bold,
+          fontSize: 24,
+        )
+      ),
+      ElevatedButton(
+        onPressed: () {
+          print('button pressed!');
+        },
+        child: Text(
+          'More Concepts',
           style: const TextStyle(
-            fontFamily:'Roboto',
             color: Colors.blue,
             fontWeight: FontWeight.bold,
-            fontSize: 24,
-          )
+            fontSize: 16,
           ),
+        ),
+      ),
+    ],
+  ),
         bottom: TabBar(
           controller: _tabController,
           tabs: const [
@@ -373,7 +391,7 @@ class _StatefulWidgetExampleState extends State<StatefulWidgetExample> {
   }
 }
 
-// Third Tab: Layout Widgets Examples
+// Layout Widgets Examples
 class LayoutWidgetsExample extends StatelessWidget {
   const LayoutWidgetsExample({super.key});
 
