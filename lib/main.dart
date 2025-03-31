@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'pages/FirstPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +16,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Precious\'s Research'),
+      initialRoute: '/',
+      routes: {
+        '/first': (context) => const FirstPage(),
+      },
+      home: const MyHomePage(title: 'My Research'),
     );
   }
 }
@@ -63,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
       ),
       ElevatedButton(
         onPressed: () {
-          print('button pressed!');
+          Navigator.pushNamed(context, '/first');
         },
         child: Text(
           'More Concepts',
