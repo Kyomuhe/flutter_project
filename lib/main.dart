@@ -180,7 +180,7 @@ class StatelessWidgetExample extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           const Text(
-            'Stateless widgets are immutable and their properties can\'t change over time.',
+            'Stateless widgets are immutable and their properties cannot be changed.These are used for static content or UI that dont change for example Displaying text,icons etc',
             style: TextStyle(fontSize: 16),
           ),
           const SizedBox(height: 24),
@@ -261,7 +261,7 @@ class CustomStatelessWidget extends StatelessWidget {
   }
 }
 
-// Second Tab: Demonstration of Stateful Widgets
+// Demonstration of Stateful Widgets
 class StatefulWidgetExample extends StatefulWidget {
   const StatefulWidgetExample({super.key});
 
@@ -293,7 +293,7 @@ class _StatefulWidgetExampleState extends State<StatefulWidgetExample> {
           ),
           const SizedBox(height: 16),
           const Text(
-            'Stateful widgets can change their state over time in response to user actions or events.',
+            'Stateful widgets can change their state over time in response to user actions or events forexample buttons,sliders, text fields.',
             style: TextStyle(fontSize: 16),
           ),
           const SizedBox(height: 24),
