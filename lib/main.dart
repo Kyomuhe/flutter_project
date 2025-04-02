@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'pages/FirstPage.dart';
+import 'pages/riverPod.dart';
+
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -19,6 +27,9 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/first': (context) => const MainPage(),
+        '/river': (context) => const App(),
+
+
       },
       home: const MyHomePage(title: 'My Research'),
     );

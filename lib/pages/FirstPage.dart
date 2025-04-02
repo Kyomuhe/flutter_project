@@ -26,14 +26,34 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Flutter Learning",
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+          "Flutter",
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
             color: Colors.blue,
           ),
         ),
+      ElevatedButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/river');
+        },
+        child: Text(
+          'RiverPod Practice',
+          style: const TextStyle(
+            color: Colors.blue,
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
+        ),
+      ),
+
+          ],
+        ),
+
         backgroundColor: Colors.white,
         elevation: 8,
         bottom: TabBar(
@@ -206,7 +226,13 @@ class StateManagementTab extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          
+          const Text('First of all state management is how we organise our app to access state and share it across widgets, so there are two types of state: local state where data is used in one widget this can be handled by setStae or Stateful widget , Another type is App/Shared/Global state this is where data is used in many widgets now here is where state management patterns are used.',
+          style: TextStyle(
+            fontSize: 17,
+
+          ),),
+          const SizedBox(height: 16),
+
           // Provider
           _buildStateManagementCard(
             'Provider',
@@ -238,7 +264,7 @@ class StateManagementTab extends StatelessWidget {
           // Riverpod
           _buildStateManagementCard(
             'Riverpod',
-            'An evolution of Provider that addresses some of its limitations.',
+            'An evolution of Provider that addresses some of its limitations.It is a reactive caching framework. It can perform network-requests with built-in error handling and caching, while automatically re-fetching data when necessary.',
             [
               'Type-safe dependency injection',
               'Compiler-time safety',
