@@ -29,9 +29,9 @@ class Task {
 // StateNotifier to manage task list state
 class TasksNotifier extends StateNotifier<List<Task>> {
   TasksNotifier() : super([
-    Task(id: '1', title: 'Learn Riverpod'),
-    Task(id: '2', title: 'Create a demo app'),
-    Task(id: '3', title: 'Present to supervisor'),
+    Task(id: '1', title: 'Understand State management'),
+    Task(id: '2', title: 'understand riverpod'),
+    Task(id: '3', title: 'Practice riverpod'),
   ]);
 
   void addTask(String title) {
