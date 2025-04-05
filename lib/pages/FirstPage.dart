@@ -37,19 +37,6 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
             color: Colors.blue,
           ),
         ),
-      ElevatedButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/river');
-        },
-        child: Text(
-          'RiverPod Practice',
-          style: const TextStyle(
-            color: Colors.blue,
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-          ),
-        ),
-      ),
 
           ],
         ),
@@ -232,6 +219,21 @@ class StateManagementTab extends StatelessWidget {
 
           ),),
           const SizedBox(height: 16),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/river');
+        },
+        child: Text(
+          'RiverPod Practice',
+          style: const TextStyle(
+            color: Colors.blue,
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
+        ),
+      ),
+          const SizedBox(height: 16),
+
 
           // Provider
           _buildStateManagementCard(

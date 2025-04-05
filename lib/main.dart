@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'pages/FirstPage.dart';
 import 'pages/riverPod.dart';
+import 'pages/SideMenu.dart'; 
+import 'pages/Widget.dart'; 
+import 'pages/Animation.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -28,6 +31,9 @@ class MyApp extends StatelessWidget {
       routes: {
         '/first': (context) => const MainPage(),
         '/river': (context) => const App(),
+        '/widgets': (context) => const FlutterWidgetsPage(),
+        '/animations': (context) => const FlutterAnimationsPage(),
+
 
 
       },
@@ -63,35 +69,29 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const SideMenu(), // Add the drawer using your SideMenu widget
       appBar: AppBar(
         backgroundColor: Colors.white,
-  title: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,  // This spaces out the title and button
-    children: [
-      Text(
-        widget.title,
-        style: const TextStyle(
-          fontFamily:'Roboto',
-          color: Colors.blue,
-          fontWeight: FontWeight.bold,
-          fontSize: 24,
-        )
-      ),
-      ElevatedButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/first');
-        },
-        child: Text(
-          'More Concepts',
-          style: const TextStyle(
-            color: Colors.blue,
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-          ),
+        // Remove the title and replace with leading burger icon
+        // The burger icon is automatically added by Scaffold when you use drawer
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.end, // Push button to the right
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/first');
+              },
+              child: const Text(
+                'More Concepts',
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
+            ),
+          ],
         ),
-      ),
-    ],
-  ),
         bottom: TabBar(
           controller: _tabController,
           tabs: const [
