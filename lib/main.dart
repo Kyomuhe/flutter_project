@@ -7,6 +7,7 @@ import 'pages/Animation.dart';
 import 'pages/Form.dart';
 import 'pages/LocalStorage.dart';
 import 'pages/FireBase.dart';
+import 'pages/Theming.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
         '/form': (context) => const FormPage(),
         '/local': (context) => const LocalStorage(),
         '/firebase': (context) => const FirebaseGuideApp(),
+        'theming' : (context) => const ThemingPage(),
 
 
 

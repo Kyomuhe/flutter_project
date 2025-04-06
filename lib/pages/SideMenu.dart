@@ -4,6 +4,7 @@ import 'Animation.dart';
 import 'Form.dart';
 import 'LocalStorage.dart';
 import 'FireBase.dart';
+import 'Theming.dart';
 
 class SideMenu extends StatelessWidget {
   const SideMenu({Key? key}) : super(key: key);
@@ -105,7 +106,10 @@ class SideMenu extends StatelessWidget {
             title: Text('Theming'),
             onTap: () {
               Navigator.pop(context);
-              // Add navigation code here when ready
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ThemingPage()),
+              );
             },
           ),
           ListTile(
