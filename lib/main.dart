@@ -6,7 +6,7 @@ import 'pages/Widget.dart';
 import 'pages/Animation.dart';
 import 'pages/Form.dart';
 import 'pages/LocalStorage.dart';
-import 'pages/FireBase.dart';
+import 'pages/Fire_Base.dart';
 import 'pages/Theming.dart';
 import 'pages/Notification.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
         '/firebase': (context) => const FirebaseGuideApp(),
         'theming' : (context) => const ThemingPage(),
         'notification' : (context) => const PushNotificationApp(),
-        
+
 
 
 
