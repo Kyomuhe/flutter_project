@@ -50,10 +50,9 @@ class _ThemingPageState extends State<ThemingPage> {
         seedColor: Colors.blue,
         brightness: Brightness.light,
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         elevation: 3,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
@@ -70,7 +69,7 @@ class _ThemingPageState extends State<ThemingPage> {
         seedColor: Colors.blue,
         brightness: Brightness.dark,
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         elevation: 3,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
@@ -907,4 +906,3 @@ class ColorInfo {
 
   ColorInfo(this.name, this.color, this.onColor);
 }
-
