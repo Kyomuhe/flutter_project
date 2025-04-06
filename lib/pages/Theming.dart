@@ -147,7 +147,7 @@ class ThemingContent extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
-                'Tap the theme toggle icon in the app bar to see light/dark mode in action',
+                'Tap the theme toggle icon in the app bar(right) to see light/dark mode in action',
                 style: TextStyle(color: colorScheme.onPrimaryContainer),
               ),
             ),
