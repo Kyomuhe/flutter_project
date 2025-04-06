@@ -27,7 +27,9 @@ class _ThemingPageState extends State<ThemingPage> {
       themeMode: _themeMode,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Flutter Theming'),
+          title: const Text('Flutter Theming',
+          style: TextStyle(color: Colors.white,),),
+          backgroundColor: Colors.blue,
           actions: [
             IconButton(
               icon: Icon(_useDarkTheme ? Icons.light_mode : Icons.dark_mode),

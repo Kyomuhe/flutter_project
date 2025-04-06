@@ -5,6 +5,7 @@ import 'Form.dart';
 import 'LocalStorage.dart';
 import 'FireBase.dart';
 import 'Theming.dart';
+import 'Notification.dart';
 
 class SideMenu extends StatelessWidget {
   const SideMenu({Key? key}) : super(key: key);
@@ -117,7 +118,10 @@ class SideMenu extends StatelessWidget {
             title: Text('Push Notifications'),
             onTap: () {
               Navigator.pop(context);
-              // Add navigation code here when ready
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const PushNotificationApp()),
+              );
             },
           ),
           ListTile(
