@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'Widget.dart'; 
 import 'Animation.dart';
-
+import 'Form.dart';
+import 'LocalStorage.dart';
 
 class SideMenu extends StatelessWidget {
   const SideMenu({Key? key}) : super(key: key);
@@ -68,7 +69,11 @@ class SideMenu extends StatelessWidget {
             title: Text('Inputs and Forms'),
             onTap: () {
               Navigator.pop(context);
-              // Add navigation code here when ready
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const FormPage()),
+
+              );
             },
           ),
           ListTile(
@@ -76,7 +81,11 @@ class SideMenu extends StatelessWidget {
             title: Text('Local Storage'),
             onTap: () {
               Navigator.pop(context);
-              // Add navigation code here when ready
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const LocalStorage()),
+              );
+
             },
           ),
           ListTile(

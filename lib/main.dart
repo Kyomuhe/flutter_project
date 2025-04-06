@@ -4,7 +4,8 @@ import 'pages/riverPod.dart';
 import 'pages/SideMenu.dart'; 
 import 'pages/Widget.dart'; 
 import 'pages/Animation.dart';
-
+import 'pages/Form.dart';
+import 'pages/LocalStorage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
@@ -33,6 +34,10 @@ class MyApp extends StatelessWidget {
         '/river': (context) => const App(),
         '/widgets': (context) => const FlutterWidgetsPage(),
         '/animations': (context) => const FlutterAnimationsPage(),
+        '/form': (context) => const FormPage(),
+        '/local': (context) => const LocalStorage(),
+
+
 
 
 
