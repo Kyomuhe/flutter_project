@@ -3,6 +3,7 @@ import 'Widget.dart';
 import 'Animation.dart';
 import 'Form.dart';
 import 'LocalStorage.dart';
+import 'FireBase.dart';
 
 class SideMenu extends StatelessWidget {
   const SideMenu({Key? key}) : super(key: key);
@@ -93,7 +94,10 @@ class SideMenu extends StatelessWidget {
             title: Text('Firebase'),
             onTap: () {
               Navigator.pop(context);
-              // Add navigation code here when ready
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const FirebaseGuideApp()),
+              );
             },
           ),
           ListTile(
