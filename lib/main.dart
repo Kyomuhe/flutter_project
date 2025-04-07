@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pages/HomePage.dart';
+import 'pages/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
           foregroundColor: Colors.white,
           elevation: 2,
         ),
-        cardTheme: CardTheme(
+        cardTheme: CardThemeData(
           elevation: 3,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
