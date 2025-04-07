@@ -165,8 +165,9 @@ Container(
                 padding: EdgeInsets.only(top: 20, left: 40, right: 40),
                 child: CategoryIcons(),
               ),
+              const SizedBox(height: 24),
 
-              // Add the ShopByConditionComponent here
+              // ShopByConditionComponent
               const ShopByConditionComponent(),
               
               // Add some bottom padding to prevent overflow with bottom navigation

@@ -8,11 +8,9 @@ class CategoryIcons extends StatefulWidget {
 }
 
 class _CategoryIconsState extends State<CategoryIcons> {
-  int _selectedCategoryIndex = 0;
-
   final List<Map<String, dynamic>> _categories = [
     {
-      'icon': 'assets/doctor.png',
+      'icon': 'assets/surgeon.png',
       'label': 'Doctor',
     },
     {
@@ -37,14 +35,13 @@ class _CategoryIconsState extends State<CategoryIcons> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: List.generate(_categories.length, (index) {
-          bool isSelected = index == _selectedCategoryIndex;
+          bool isFirstCard = index == 0;
           
-          return GestureDetector(
+          return InkWell(
             onTap: () {
-              setState(() {
-                _selectedCategoryIndex = index;
-              });
+              // Navigation will be implemented later
             },
+            borderRadius: BorderRadius.circular(20),
             child: Column(
               children: [
                 // Icon container
@@ -52,7 +49,7 @@ class _CategoryIconsState extends State<CategoryIcons> {
                   width: 62.42,
                   height: 62.42,
                   decoration: BoxDecoration(
-                    color: isSelected ? const Color(0xFF0085FF) : Colors.white,
+                    color: isFirstCard ? const Color(0xFF0085FF) : Colors.white,
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
@@ -67,7 +64,7 @@ class _CategoryIconsState extends State<CategoryIcons> {
                       _categories[index]['icon'],
                       width: 38,
                       height: 34,
-                      color: isSelected ? Colors.white : Colors.grey[600],
+                      // No color tint applied to the images
                     ),
                   ),
                 ),
@@ -79,7 +76,7 @@ class _CategoryIconsState extends State<CategoryIcons> {
                     fontFamily: 'Poppins',
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
-                    color: isSelected ? const Color(0xFF0085FF) : Colors.grey[600],
+                    color: isFirstCard ? const Color(0xFF0085FF) : Colors.grey[600],
                   ),
                 ),
               ],

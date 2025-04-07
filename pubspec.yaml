@@ -73,7 +73,7 @@ flutter:
   assets:
     - assets/
     - assets/home.png
-    - assets/doctor.png
+    - assets/surgeon.png
     - assets/lab.png
     - assets/nurse.png
     - assets/swipper1.png
