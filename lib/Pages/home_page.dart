@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../Components/image_swipper.dart';
 import '../Components/category_icons.dart';
-import '../Components/images.dart';
+import '../Components/images_Page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
