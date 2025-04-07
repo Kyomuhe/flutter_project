@@ -12,7 +12,7 @@ class _CategoryIconsState extends State<CategoryIcons> {
 
   final List<Map<String, dynamic>> _categories = [
     {
-      'icon': 'assets/Doctor.png',
+      'icon': 'assets/doctor.png',
       'label': 'Doctor',
     },
     {

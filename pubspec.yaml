@@ -73,7 +73,7 @@ flutter:
   assets:
     - assets/
     - assets/home.png
-    - assets/Doctor.png
+    - assets/doctor.png
     - assets/lab.png
     - assets/nurse.png
     - assets/swipper1.png
@@ -81,9 +81,9 @@ flutter:
     - assets/precious.png
     - assets/derma.png
     - assets/joint.png
-    - assets/Derma.png
-    - assets/Diabetes.png
-    - assets/Pain.png
+    - assets/derma.png
+    - assets/diabetes.png
+    - assets/pain.png
     - assets/condition.png
     - assets/profile.png
     - assets/cal.png

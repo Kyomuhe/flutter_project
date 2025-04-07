@@ -138,7 +138,7 @@ Container(
       width: 1.6,
     ),
     image: const DecorationImage(
-      image: AssetImage('profile.png'),
+      image: AssetImage('assets/profile.png'),
       fit: BoxFit.cover,
     ),
   ),
