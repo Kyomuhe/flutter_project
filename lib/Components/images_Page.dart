@@ -15,12 +15,12 @@ class _ShopByConditionComponentState extends State<ShopByConditionComponent> {
     {'image': 'assets/diabetes.png', 'label': 'Diabetes'},
     {'image': 'assets/condition.png', 'label': 'Heart Care'},
     {'image': 'assets/precious.png', 'label': 'Intestines'},
-    {'image': 'assets/derma.png', 'label': 'Face Care'},
+    {'image': 'assets/care.png', 'label': 'Face Care'},
     {'image': 'assets/joint.png', 'label': 'Joint Pain'},
     {'image': 'assets/diabetes.png', 'label': 'Diabetes'},
     {'image': 'assets/condition.png', 'label': 'Heart Care'},
     {'image': 'assets/precious.png', 'label': 'Intestines'},
-    {'image': 'assets/derma.png', 'label': 'Face Care'},
+    {'image': 'assets/care.png', 'label': 'Face Care'},
     {'image': 'assets/joint.png', 'label': 'Joint Pain'},
 
   ];
