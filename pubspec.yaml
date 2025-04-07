@@ -71,17 +71,20 @@ flutter:
   uses-material-design: true
 
   assets:
-  - assets/home.png
-  - assets/Doctor.png
-  - assets/lab.png
-  - assets/nurse.png
-  - assets/swipper1.png
-  - assets/app.png
-  - assets/Diabetes.PNG
-  - assets/Heart.PNG
-  - assets/Kidney.PNG
-  - assets/Derma.PNG
-  - assets/Joint.PNG
+    - assets/
+    - assets/home.png
+    - assets/Doctor.png
+    - assets/lab.png
+    - assets/nurse.png
+    - assets/swipper1.png
+    - assets/app.png
+    - assets/Heart.png
+    - assets/Kidney.png
+    - assets/derma.png
+    - assets/joint.png
+    - assets/Derma.png
+    - assets/Diabetes.png
+    - assets/Pain.png
 
 
 
