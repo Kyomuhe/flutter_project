@@ -21,7 +21,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // Correct image paths with file extensions
     final List<String> bannerImages = [
       'assets/swipper1.png',
       'assets/swipper1.png',
@@ -31,148 +30,144 @@ class _HomePageState extends State<HomePage> {
     ];
 
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              // Custom app bar/header section
-              Container(
-                padding: const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 8),
-                color: Colors.white,
-                child: Column(
-                  children: [
-                    // First row: Logo and greeting
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        // Logo
-                        Row(
-                          children: [
-                            Image.asset(
-                              'assets/home.png',
-                              width: 20,
-                              height: 18,
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xB861CEFF), // bluish with opacity
+              Colors.white,      // transition to white
+              Colors.white,      // solid white
+            ],
+            stops: [0.0, 0.3, 1.0],
+          ),
+        ),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                // App bar / header
+                Container(
+                  padding: const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 8),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Image.asset(
+                                'assets/home.png',
+                                width: 20,
+                                height: 18,
+                              ),
+                              const SizedBox(width: 8),
+                              RichText(
+                                text: const TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: "Next",
+                                      style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        color: Color(0xFF0085FF),
+                                        fontSize: 23,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: "Doc",
+                                      style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        color: Color(0xFF0085FF),
+                                        fontSize: 23,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          const Text(
+                            "Hello, Abaasa.",
+                            style: TextStyle(
+                              fontFamily: 'Poppins',
+                              color: Colors.black54,
+                              fontSize: 14,
                             ),
-                            const SizedBox(width: 8),
-                            RichText(
-                              text: const TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: "Next",
-                                    style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      color: Color(0xFF0085FF),
-                                      fontSize: 23,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: "Doc",
-                                    style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      color: Color(0xFF0085FF),
-                                      fontSize: 23,
-                                    ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(9),
+                                color: Colors.white,
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Color(0x12000000),
+                                    offset: Offset(0, 6),
+                                    blurRadius: 14,
                                   ),
                                 ],
                               ),
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  hintText: "Search for Medicines",
+                                  hintStyle: TextStyle(
+                                    fontFamily: 'Poppins',
+                                    color: Colors.grey,
+                                    fontSize: 14,
+                                  ),
+                                  prefixIcon: Icon(Icons.search, color: Colors.grey),
+                                  border: InputBorder.none,
+                                  contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                                ),
+                              ),
                             ),
-                          ],
-                        ),
-                        // Greeting text
-                        const Text(
-                          "Hello, Abaasa.",
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            color: Colors.black54,
-                            fontSize: 14,
-                            fontWeight: FontWeight.normal,
                           ),
-                        ),
-                      ],
-                    ),
-                    
-                    const SizedBox(height: 16),
-                    
-                    // Second row: Search field and profile
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Container(
+                          const SizedBox(width: 16),
+                          Container(
+                            width: 46,
+                            height: 46,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(9),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Color(0x12000000), // #00000012 - shadow with 12% opacity
-                                  offset: Offset(0, 6),
-                                  blurRadius: 14,
-                                  ),
-                                  ],
-                                  ),
-                                  child: TextField(
-                                    decoration: InputDecoration(
-                                      hintText: "Search for Medicines",
-                                      hintStyle: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      color: Colors.grey[400],
-                                      fontSize: 14,
-                                      ),
-                                      prefixIcon: Icon(Icons.search, color: Colors.grey[400]),
-                                      border: InputBorder.none,
-                                      contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                                      ),
-                                      ),
-                                      ),
-                                      ),
-                                      
-                                      const SizedBox(width: 16),
-                        // Profile avatar
-Container(
-  width: 46,
-  height: 46,
-  decoration: BoxDecoration(
-    shape: BoxShape.circle,
-    border: Border.all(
-      color: Colors.white,
-      width: 1.6,
-    ),
-    image: const DecorationImage(
-      image: AssetImage('assets/profile.png'),
-      fit: BoxFit.cover,
-    ),
-  ),
-),                      ],
-                    ),
-                    
-                    const SizedBox(height: 24),
-                    
-                    // Image Swiper
-                    Padding(
-                      padding: const EdgeInsets.only(left: 4, right: 4),
-                      child: ImageSwiper(
-                        imageUrls: bannerImages,
-                        autoSwipe: true,
-                        swipeIntervalSeconds: 3,
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: Colors.white,
+                                width: 1.6,
+                              ),
+                              image: const DecorationImage(
+                                image: AssetImage('assets/profile.png'),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 24),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 4, right: 4),
+                        child: ImageSwiper(
+                          imageUrls: bannerImages,
+                          autoSwipe: true,
+                          swipeIntervalSeconds: 3,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              
-              // Category icons section
-              const Padding(
-                padding: EdgeInsets.only(top: 20, left: 40, right: 40),
-                child: CategoryIcons(),
-              ),
-              const SizedBox(height: 24),
-
-              // ShopByConditionComponent
-              const ShopByConditionComponent(),
-              
-              // Add some bottom padding to prevent overflow with bottom navigation
-              const SizedBox(height: 16),
-            ],
+                const Padding(
+                  padding: EdgeInsets.only(top: 20, left: 40, right: 40),
+                  child: CategoryIcons(),
+                ),
+                const SizedBox(height: 24),
+                const ShopByConditionComponent(),
+                const SizedBox(height: 16),
+              ],
+            ),
           ),
         ),
       ),
