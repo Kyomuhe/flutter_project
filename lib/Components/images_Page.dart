@@ -49,7 +49,6 @@ class _ShopByConditionComponentState extends State<ShopByConditionComponent> {
                 style: TextStyle(
                   color: Colors.blue,
                   fontSize: 18,
-                  fontWeight: FontWeight.bold,
                 ),
               ),
               

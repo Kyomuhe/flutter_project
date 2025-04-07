@@ -24,14 +24,14 @@ class _CategoryIconsState extends State<CategoryIcons> {
       'label': 'Hospital',
     },
     {
-      'icon': 'assets/app.png',
+      'icon': 'assets/cal.png',
       'label': 'Ambulance',
     },
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 291,
       height: 92,
       child: Row(
@@ -56,8 +56,8 @@ class _CategoryIconsState extends State<CategoryIcons> {
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.05),
-                        blurRadius: 5,
+                        color: const Color(0x33000000), // #00000033 - 20% opacity
+                        blurRadius: 25,
                         offset: const Offset(0, 2),
                       ),
                     ],
