@@ -17,7 +17,7 @@ class _CategoryIconsState extends State<CategoryIcons> {
     },
     {
       'icon': 'assets/nurse.png',
-      'label': 'Pharmacys',
+      'label': 'Pharmacy',
     },
     {
       'icon': 'assets/lab.png',
