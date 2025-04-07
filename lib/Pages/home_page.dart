@@ -97,41 +97,52 @@ class _HomePageState extends State<HomePage> {
                     // Second row: Search field and profile
                     Row(
                       children: [
-                        // Search field
                         Expanded(
                           child: Container(
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(9),
                               color: Colors.white,
-                              border: Border.all(color: Colors.grey[300]!),
-                            ),
-                            child: TextField(
-                              decoration: InputDecoration(
-                                hintText: "Search for Medicines",
-                                hintStyle: TextStyle(
-                                  fontFamily: 'Poppins',
-                                  color: Colors.grey[400],
-                                  fontSize: 14
-                                ),
-                                prefixIcon: Icon(Icons.search, color: Colors.grey[400]),
-                                border: InputBorder.none,
-                                contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 16),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color(0x12000000), // #00000012 - shadow with 12% opacity
+                                  offset: Offset(0, 6),
+                                  blurRadius: 14,
+                                  ),
+                                  ],
+                                  ),
+                                  child: TextField(
+                                    decoration: InputDecoration(
+                                      hintText: "Search for Medicines",
+                                      hintStyle: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      color: Colors.grey[400],
+                                      fontSize: 14,
+                                      ),
+                                      prefixIcon: Icon(Icons.search, color: Colors.grey[400]),
+                                      border: InputBorder.none,
+                                      contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                                      ),
+                                      ),
+                                      ),
+                                      ),
+                                      
+                                      const SizedBox(width: 16),
                         // Profile avatar
-                        CircleAvatar(
-                          backgroundColor: Colors.grey[300],
-                          radius: 16,
-                          child: const Icon(
-                            Icons.person,
-                            color: Colors.white,
-                            size: 20,
-                          ),
-                        ),
-                      ],
+Container(
+  width: 46,
+  height: 46,
+  decoration: BoxDecoration(
+    shape: BoxShape.circle,
+    border: Border.all(
+      color: Colors.white,
+      width: 1.6,
+    ),
+    image: const DecorationImage(
+      image: AssetImage('profile.png'),
+      fit: BoxFit.cover,
+    ),
+  ),
+),                      ],
                     ),
                     
                     const SizedBox(height: 24),
