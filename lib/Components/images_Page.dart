@@ -14,12 +14,12 @@ class _ShopByConditionComponentState extends State<ShopByConditionComponent> {
   final List<Map<String, String>> _conditionItems = [
     {'image': 'assets/Diabetes.png', 'label': 'Diabetes'},
     {'image': 'assets/condition.png', 'label': 'Heart Care'},
-    {'image': 'assets/Kidney.png', 'label': 'Intestines'},
+    {'image': 'assets/precious.png', 'label': 'Intestines'},
     {'image': 'assets/Derma.png', 'label': 'Face Care'},
     {'image': 'assets/joint.png', 'label': 'Joint Pain'},
     {'image': 'assets/Diabetes.png', 'label': 'Diabetes'},
     {'image': 'assets/condition.png', 'label': 'Heart Care'},
-    {'image': 'assets/Kidney.png', 'label': 'Intestines'},
+    {'image': 'assets/precious.png', 'label': 'Intestines'},
     {'image': 'assets/Derma.png', 'label': 'Face Care'},
     {'image': 'assets/joint.png', 'label': 'Joint Pain'},
 
