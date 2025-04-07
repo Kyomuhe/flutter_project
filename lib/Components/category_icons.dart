@@ -12,19 +12,19 @@ class _CategoryIconsState extends State<CategoryIcons> {
 
   final List<Map<String, dynamic>> _categories = [
     {
-      'icon': 'Doctor.png',
+      'icon': 'assets/Doctor.png',
       'label': 'Doctor',
     },
     {
-      'icon': 'nurse.png',
+      'icon': 'assets/nurse.png',
       'label': 'Pharmacys',
     },
     {
-      'icon': 'lab.png',
+      'icon': 'assets/lab.png',
       'label': 'Hospital',
     },
     {
-      'icon': 'app.png',
+      'icon': 'assets/app.png',
       'label': 'Ambulance',
     },
   ];
