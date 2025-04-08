@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 
-class ShopByConditionComponent extends StatefulWidget {
+// Main component that displays the horizontal scrollable list
+class ShopByConditionComponent extends StatelessWidget {
   const ShopByConditionComponent({Key? key}) : super(key: key);
 
-  @override
-  State<ShopByConditionComponent> createState() => _ShopByConditionComponentState();
-}
-
-class _ShopByConditionComponentState extends State<ShopByConditionComponent> {
-  bool _showAllItems = false;
-
   // Sample data for demonstration - replace with your actual items
-  final List<Map<String, String>> _conditionItems = [
+  static final List<Map<String, String>> conditionItems = [
     {'image': 'assets/diabetes.png', 'label': 'Diabetes'},
     {'image': 'assets/condition.png', 'label': 'Heart Care'},
     {'image': 'assets/precious.png', 'label': 'Intestines'},
@@ -22,15 +16,12 @@ class _ShopByConditionComponentState extends State<ShopByConditionComponent> {
     {'image': 'assets/precious.png', 'label': 'Intestines'},
     {'image': 'assets/care.png', 'label': 'Face Care'},
     {'image': 'assets/joint.png', 'label': 'Joint Pain'},
-
   ];
 
   @override
   Widget build(BuildContext context) {
-    // Determine how many items to display based on _showAllItems flag
-    final displayItems = _showAllItems 
-        ? _conditionItems 
-        : _conditionItems.take(5).toList();
+    // Only display the first 5 items in the main view
+    final displayItems = conditionItems.take(5).toList();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,12 +43,16 @@ class _ShopByConditionComponentState extends State<ShopByConditionComponent> {
                 ),
               ),
               
-              // "Explore all" text - clickable
+              // "Explore all" text - clickable and navigates to grid view
               GestureDetector(
                 onTap: () {
-                  setState(() {
-                    _showAllItems = !_showAllItems;
-                  });
+                  // Navigate to a new page with a grid view
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AllConditionsPage(items: conditionItems),
+                    ),
+                  );
                 },
                 child: const Text(
                   'Explore all',
@@ -101,7 +96,7 @@ class _ShopByConditionComponentState extends State<ShopByConditionComponent> {
                     const SizedBox(height: 4),
                     
                     // Text label below image
-                    Container(
+                    SizedBox(
                       width: 49,
                       height: 11,
                       child: Center(
@@ -118,6 +113,116 @@ class _ShopByConditionComponentState extends State<ShopByConditionComponent> {
                 ),
               );
             },
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+// New page that displays all items in a grid with two columns
+class AllConditionsPage extends StatelessWidget {
+  final List<Map<String, String>> items;
+
+  const AllConditionsPage({Key? key, required this.items}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      // No app bar - using custom header instead
+      body: SafeArea(
+        child: Column(
+          children: [
+            // Custom header with back button and "All conditions" text
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+              child: Row(
+                children: [
+                  // Back button
+                  GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: const Icon(Icons.arrow_back, color: Colors.blue),
+                  ),
+                  const SizedBox(width: 16),
+                  // "All conditions" text
+                  const Text(
+                    'All conditions',
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            
+            // Grid of conditions
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 16.0,
+                    mainAxisSpacing: 16.0,
+                    childAspectRatio: 0.85,
+                  ),
+                  itemCount: items.length,
+                  itemBuilder: (context, index) {
+                    return ConditionGridItem(
+                      image: items[index]['image']!,
+                      label: items[index]['label']!,
+                    );
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// Individual grid item for the AllConditionsPage
+class ConditionGridItem extends StatelessWidget {
+  final String image;
+  final String label;
+
+  const ConditionGridItem({
+    Key? key,
+    required this.image,
+    required this.label,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        // Image container
+        Expanded(
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: Colors.grey.shade300,
+              image: DecorationImage(
+                image: AssetImage(image),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        ),
+        
+        const SizedBox(height: 8),
+        
+        // Text label below image
+        Text(
+          label,
+          style: const TextStyle(
+            color: Color(0xFF41474C),
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
           ),
         ),
       ],
