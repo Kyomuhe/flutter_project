@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import '../Components/image_swipper.dart';
 import '../Components/category_icons.dart';
 import '../Components/images_Page.dart';
+import '../Pages/products_page.dart';
+import '../Components/shop_categories.dart';
+import '../Components/order_card.dart';
+import '../Components/expert.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -114,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ],
                               ),
-                              child: TextField(
+                              child: const TextField(
                                 decoration: InputDecoration(
                                   hintText: "Search for Medicines",
                                   hintStyle: TextStyle(
@@ -124,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   prefixIcon: Icon(Icons.search, color: Colors.grey),
                                   border: InputBorder.none,
-                                  contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                                  contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                                 ),
                               ),
                             ),
@@ -165,7 +169,43 @@ class _HomePageState extends State<HomePage> {
                 ),
                 const SizedBox(height: 24),
                 const ShopByConditionComponent(),
-                const SizedBox(height: 16),
+                const SizedBox(height: 24),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.6, 
+                  child: ProductPage(),
+                ),
+               //order card
+                PrescriptionOrderCard(
+                  leftImagePath: 'assets/rx.png',
+                  uploadIconPath: 'assets/vector.png',
+                  onUploadPressed: () {
+                    print('Upload button pressed');
+                  },
+                ),
+                const SizedBox(height: 24),
+
+                const ShopCategoriesWidget(),
+                const SizedBox(height: 24),
+
+
+                //expert
+
+              NCareExpertContact(
+                expertImagePath: 'assets/profile1.png',
+                callIconPath: 'assets/call.png',
+                chatIconPath: 'assets/chat.png',
+                onCallPressed: () {
+                // Handle call button press
+                  print('Call button pressed');
+                },
+                onChatPressed: () {
+                // Handle chat button press
+                  print('Chat button pressed');
+               },
+               ),
+
+                const SizedBox(height: 24),
+
               ],
             ),
           ),

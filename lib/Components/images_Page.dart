@@ -109,7 +109,7 @@ class _ShopByConditionComponentState extends State<ShopByConditionComponent> {
                           displayItems[index]['label']!,
                           style: const TextStyle(
                             color: Color(0xFF41474C),
-                            fontSize: 8,
+                            fontSize: 10,
                           ),
                         ),
                       ),
