@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import '../Components/product_card.dart';
+import '../models/product.dart'; // Import the consolidated Product model
+import 'product_detail.dart';
+import '../Components/cart.dart';
+import 'package:provider/provider.dart';
 
 class ProductPage extends StatelessWidget {
   const ProductPage({super.key});
-
   // Create sample product data with 8 products
-  static List<Product> getSampleProducts() {
+  static List<Product> getSampleProducts(){
     return [
       Product(
         id: '1',
         name: 'Hydrocodone',
-        imageUrl: 'assets/product3.PNG',
+        imageUrl: 'assets/product.png',
         description: 'High-quality pain relief medication',
         price: 199999,
         rating: 4,
@@ -93,6 +96,9 @@ class ProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final products = getSampleProducts();
+    // Get the CartProvider from the widget tree
+    final cartProvider = Provider.of<CartProvider>(context, listen: true);
+    
     
     return Scaffold(
       body: SafeArea(
@@ -103,7 +109,6 @@ class ProductPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  width: 344,
                   height: 32,
                   margin: const EdgeInsets.only(left: 20, right: 20),
                   child: Row(
@@ -124,7 +129,10 @@ class ProductPage extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => AllProductsPage(products: products),
+                              builder: (context) => AllProductsPage(
+                                products: products,
+                                cartProvider: cartProvider, // Pass cartProvider here
+                              ),
                             ),
                           );
                         },
@@ -152,13 +160,15 @@ class ProductPage extends StatelessWidget {
                       return ProductCard(
                         product: products[index],
                         onProductSelect: (productId) {
-                          // Handle product selection, e.g., navigate to detail page
+                          // This callback is now handled in the ProductCard itself
                           print('Selected product ID: $productId');
                         },
+                        cartProvider: cartProvider, // Pass the cart provider to the ProductCard
                       );
                     },
                   ),
                 ),
+                
               ],
             ),
           ),
@@ -168,11 +178,16 @@ class ProductPage extends StatelessWidget {
   }
 }
 
-// New page that displays all products in a grid with two columns
+// Page that displays all products in a grid with two columns
 class AllProductsPage extends StatelessWidget {
   final List<Product> products;
+  final CartProvider cartProvider; // Add this parameter
 
-  const AllProductsPage({Key? key, required this.products}) : super(key: key);
+  const AllProductsPage({
+    Key? key, 
+    required this.products,
+    required this.cartProvider, // Mark as required
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -214,17 +229,16 @@ class AllProductsPage extends StatelessWidget {
                     crossAxisCount: 2,
                     crossAxisSpacing: 16.0,
                     mainAxisSpacing: 16.0,
-                    childAspectRatio: 0.78, // Adjusted to match product card proportions
+                    childAspectRatio: 0.55, // Adjusted to match product card proportions
                   ),
                   itemCount: products.length,
                   itemBuilder: (context, index) {
-                    // Use the original ProductCard component
                     return ProductCard(
                       product: products[index],
                       onProductSelect: (productId) {
-                        // Handle product selection
                         print('Selected product ID: $productId');
                       },
+                      cartProvider: cartProvider, // Pass the cartProvider
                     );
                   },
                 ),

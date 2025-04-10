@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:ui' as ui;
 
 // Main component that displays the horizontal scrollable list
 class ShopByConditionComponent extends StatelessWidget {
@@ -120,7 +121,6 @@ class ShopByConditionComponent extends StatelessWidget {
   }
 }
 
-// New page that displays all items in a grid with two columns
 class AllConditionsPage extends StatelessWidget {
   final List<Map<String, String>> items;
 
@@ -129,57 +129,86 @@ class AllConditionsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // No app bar - using custom header instead
-      body: SafeArea(
-        child: Column(
-          children: [
-            // Custom header with back button and "All conditions" text
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-              child: Row(
-                children: [
-                  // Back button
-                  GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: const Icon(Icons.arrow_back, color: Colors.blue),
-                  ),
-                  const SizedBox(width: 16),
-                  // "All conditions" text
-                  const Text(
-                    'All conditions',
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+      body: Stack(
+        children: [
+          // Gradient background with blur effects
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Color(0x61CEFFB8), // Top left: #61CEFFB8 with fade
+                  Color(0x0EBE7E4D), // Bottom right: #0EBE7E4D
                 ],
               ),
             ),
-            
-            // Grid of conditions
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 16.0,
-                    mainAxisSpacing: 16.0,
-                    childAspectRatio: 0.85,
-                  ),
-                  itemCount: items.length,
-                  itemBuilder: (context, index) {
-                    return ConditionGridItem(
-                      image: items[index]['image']!,
-                      label: items[index]['label']!,
-                    );
-                  },
-                ),
+            child: BackdropFilter(
+              filter: ui.ImageFilter.blur(
+                sigmaX: 121.0,
+                sigmaY: 121.0,
+              ),
+              child: Container(
+                color: Colors.transparent,
               ),
             ),
-          ],
-        ),
+          ),
+          
+          // Main content
+          SafeArea(
+            child: Column(
+              children: [
+                Container(
+                  color: Colors.white, 
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+                  child: Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () => Navigator.pop(context),
+                        child: Image.asset(
+                          'assets/icon.png',
+                          width: 24,
+                          height: 24,
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      const Text(
+                        'All conditions',
+                        style: TextStyle(
+                          color: Color(0xFF2D2D2D), 
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                
+                // Grid of conditions with 3 columns
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: GridView.builder(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3, // Changed from 2 to 3 columns
+                        crossAxisSpacing: 12.0, // Slightly reduced spacing for 3 columns
+                        mainAxisSpacing: 16.0,
+                        childAspectRatio: 0.75, // Adjusted for 3 columns
+                      ),
+                      itemCount: items.length,
+                      itemBuilder: (context, index) {
+                        return ConditionGridItem(
+                          image: items[index]['image']!,
+                          label: items[index]['label']!,
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -221,9 +250,11 @@ class ConditionGridItem extends StatelessWidget {
           label,
           style: const TextStyle(
             color: Color(0xFF41474C),
-            fontSize: 14,
+            fontSize: 12, // Slightly reduced for 3-column layout
             fontWeight: FontWeight.w500,
           ),
+          textAlign: TextAlign.center,
+          overflow: TextOverflow.ellipsis,
         ),
       ],
     );

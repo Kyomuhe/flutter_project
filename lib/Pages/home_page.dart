@@ -6,6 +6,9 @@ import '../Pages/products_page.dart';
 import '../Components/shop_categories.dart';
 import '../Components/order_card.dart';
 import '../Components/expert.dart';
+import 'package:provider/provider.dart';
+import '../Components/cart.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -170,14 +173,19 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(height: 24),
                 const ShopByConditionComponent(),
                 const SizedBox(height: 24),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.6, 
-                  child: ProductPage(),
-                ),
+SizedBox(
+  height: MediaQuery.of(context).size.height * 0.6, 
+  child: Consumer<CartProvider>(
+    builder: (context, cartProvider, child) {
+      return ProductPage();
+    }
+  ),
+),
+
                //order card
                 PrescriptionOrderCard(
                   leftImagePath: 'assets/rx.png',
-                  uploadIconPath: 'assets/vector.png',
+                  uploadIconPath: 'assets/Vector.png',
                   onUploadPressed: () {
                     print('Upload button pressed');
                   },

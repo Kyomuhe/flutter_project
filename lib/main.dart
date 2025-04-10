@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart'; 
 import 'Pages/home_page.dart';
+import './Components/cart.dart'; 
 
+// In main.dart
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => CartProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -24,7 +33,7 @@ class MyApp extends StatelessWidget {
           foregroundColor: Colors.white,
           elevation: 2,
         ),
-        cardTheme: CardThemeData(
+        cardTheme: CardTheme(
           elevation: 3,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),

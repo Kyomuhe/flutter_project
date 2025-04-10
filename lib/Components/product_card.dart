@@ -1,36 +1,19 @@
 import 'package:flutter/material.dart';
 import 'rating_widget.dart';
-
-class Product {
-  final String id;
-  final String name;
-  final String imageUrl;
-  final String description;
-  final double price;
-  final int rating;
-  final int discount;
-  final String vendorName;
-
-  Product({
-    required this.id,
-    required this.name,
-    required this.imageUrl,
-    required this.description,
-    required this.price,
-    required this.rating,
-    required this.discount,
-    required this.vendorName,
-  });
-}
+import '../pages/product_detail.dart';
+import 'cart.dart';
+import '../models/product.dart'; // Import the consolidated Product model
 
 class ProductCard extends StatelessWidget {
   final Product product;
   final Function(String) onProductSelect;
+  final CartProvider cartProvider;
 
   const ProductCard({
     Key? key,
     required this.product,
     required this.onProductSelect,
+    required this.cartProvider,
   }) : super(key: key);
 
   String formatCurrency(double amount) {
@@ -96,7 +79,17 @@ class ProductCard extends StatelessWidget {
                 left: 0,
                 right: 0,
                 child: GestureDetector(
-                  onTap: () => onProductSelect(product.id),
+                  onTap: () {
+                    // Navigate to product detail page when image is tapped
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductDetailPage(product: product),
+                      ),
+                    );
+                    // Also call the provided callback
+                    onProductSelect(product.id);
+                  },
                   child: Center(
                     child: SizedBox(
                       width: 102,
@@ -104,6 +97,13 @@ class ProductCard extends StatelessWidget {
                       child: Image.asset(
                         product.imageUrl,
                         fit: BoxFit.contain,
+                        errorBuilder: (context, error, stackTrace) {
+                          // Fallback for missing assets
+                          return Container(
+                            color: Colors.grey[300],
+                            child: const Icon(Icons.image, size: 50),
+                          );
+                        },
                       ),
                     ),
                   ),
@@ -190,25 +190,34 @@ class ProductCard extends StatelessWidget {
                       ),
                     ),
                     
-                    // Add to cart text
-                    TextButton(
-                      onPressed: () {
-                        // Add to cart functionality would go here
-                      },
-                      style: TextButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
-                        minimumSize: Size.zero,
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      ),
-                      child: const Text(
-                        'Add to Cart',
-                        style: TextStyle(
-                          fontSize: 11,
-                          color: Color(0xFF3B82F6),
-                        ),
-                      ),
-                    ),
-                  ],
+                    // Add to cart button
+// Update this in product_card.dart, inside the ProductCard build method
+TextButton(
+  onPressed: () {
+    // Add to cart functionality
+    cartProvider.addItem(product);
+    
+    // Navigate directly to cart page instead of showing a snackbar
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CartPage(cartProvider: cartProvider),
+      ),
+    );
+  },
+  style: TextButton.styleFrom(
+    padding: const EdgeInsets.symmetric(horizontal: 8),
+    minimumSize: Size.zero,
+    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+  ),
+  child: const Text(
+    'Add to Cart',
+    style: TextStyle(
+      fontSize: 11,
+      color: Color(0xFF3B82F6),
+    ),
+  ),
+),                  ],
                 ),
               ],
             ),
