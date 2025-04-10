@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
-// Modified RatingWidget
+// Modified RatingWidget with customizable color
 class RatingWidget extends StatelessWidget {
   final int rating;
+  final Color color;
 
-  const RatingWidget({Key? key, required this.rating}) : super(key: key);
+  const RatingWidget({
+    Key? key, 
+    required this.rating, 
+    this.color = const Color(0xFF3B82F6), // Default blue color
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +19,7 @@ class RatingWidget extends StatelessWidget {
         return Icon(
           Icons.star,
           size: 12, // Smaller stars
-          color: index < rating ? const Color(0xFF3B82F6) : Colors.grey[300],
+          color: index < rating ? color : Colors.grey[300],
         );
       }),
     );

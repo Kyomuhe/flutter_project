@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/product.dart'; // Import the consolidated Product model
+import '../models/product.dart'; 
 
 // Cart Item model
 class CartItem {
@@ -14,7 +14,7 @@ class CartItem {
   double get totalPrice => product.price * quantity;
 }
 
-// Cart Provider to manage state
+// Cart Provider 
 class CartProvider extends ChangeNotifier {
   final List<CartItem> _items = [];
   

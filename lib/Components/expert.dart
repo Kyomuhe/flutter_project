@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'doctor_profile.dart';
 
 class NCareExpertContact extends StatelessWidget {
   final String expertImagePath;
@@ -127,42 +128,47 @@ class NCareExpertContact extends StatelessWidget {
             const SizedBox(width: 16),
             
             // Chat now button (blue filled)
-            Container(
-              width: 145,
-              height: 38,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: const Color(0xFF0085FF),
-              ),
-              child: TextButton(
-                onPressed: onChatPressed,
-                style: TextButton.styleFrom(
-                  padding: EdgeInsets.zero,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      chatIconPath,
-                      width: 16,
-                      height: 16,
-                      color: Colors.white,
-                    ),
-                    const SizedBox(width: 8),
-                    const Text(
-                      'Chat now',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Poppins',
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
+Container(
+  width: 145,
+  height: 38,
+  decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(8),
+    color: const Color(0xFF0085FF),
+  ),
+  child: TextButton(
+    onPressed: () {
+      // Navigate to the DoctorPage when button is pressed
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const DoctorPage()),
+      );
+    },
+    style: TextButton.styleFrom(
+      padding: EdgeInsets.zero,
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.asset(
+          chatIconPath,
+          width: 16,
+          height: 16,
+          color: Colors.white,
+        ),
+        const SizedBox(width: 8),
+        const Text(
+          'Chat now',
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: 'Poppins',
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ],
+    ),
+  ),
+),          ],
         ),
       ],
     );
