@@ -162,7 +162,6 @@ Widget _buildActionSheetItem(IconData icon, String text, Color iconColor) {
       ],
     ),
     onPressed: () {
-      Navigator.pop(context);
       // Handle specific action based on selection
     },
   );
