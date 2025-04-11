@@ -13,6 +13,12 @@ dependencies:
   flutter:
     sdk: flutter
 
+  
+  intl: ^0.18.1 
+
+
+
+
 
 dev_dependencies:
   flutter_test:
@@ -84,6 +90,7 @@ flutter:
     - assets/profile4.png
     - assets/left.png
     - assets/chain.png
+    - assets/food_image.png
 
 
 

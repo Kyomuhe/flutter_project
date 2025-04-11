@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../Components/product_card.dart';
-import '../models/product.dart'; // Import the consolidated Product model
-import 'product_detail.dart';
+import '../models/product.dart'; 
 import '../Components/cart.dart';
 import 'package:provider/provider.dart';
 

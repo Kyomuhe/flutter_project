@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'messages.dart';
 
 class DoctorDetailsPage extends StatelessWidget {
   final String name;
@@ -112,7 +113,6 @@ class DoctorDetailsPage extends StatelessWidget {
                       ),
                     ),
                     
-                    // Doctor profile card with white background and blue border
                     Positioned(
                       top: 144,
                       left: 34,
@@ -205,10 +205,9 @@ class DoctorDetailsPage extends StatelessWidget {
             ),
           ),
           
-          // Content after the blue area - increased height to fix overflow
+          
           const SizedBox(height: 75),
           
-          // Stats section (Patients, Experience, Rating)
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
@@ -269,28 +268,35 @@ class DoctorDetailsPage extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: Container(
-                    height: 42,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6),
-                      border: Border.all(
-                        color: const Color(0xFF0085FF),
-                        width: 1.5,
-                      ),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        'Chat',
-                        style: TextStyle(
-                          color: Color(0xFF0085FF),
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: 'Poppins',
-
-                        ),
-                      ),
-                    ),
-                  ),
+child: GestureDetector(
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Messages()),
+    );
+  },
+  child: Container(
+    height: 42,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(6),
+      border: Border.all(
+        color: const Color(0xFF0085FF),
+        width: 1.5,
+      ),
+    ),
+    child: const Center(
+      child: Text(
+        'Chat',
+        style: TextStyle(
+          color: Color(0xFF0085FF),
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+          fontFamily: 'Poppins',
+        ),
+      ),
+    ),
+  ),
+)
                 ),
                 const SizedBox(width: 15),
                 Expanded(
