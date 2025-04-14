@@ -127,7 +127,6 @@ class NCareExpertContact extends StatelessWidget {
             
             const SizedBox(width: 16),
             
-            // Chat now button (blue filled)
 Container(
   width: 145,
   height: 38,

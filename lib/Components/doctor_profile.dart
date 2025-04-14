@@ -10,7 +10,6 @@ class DoctorPage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          // White background header with back button and text
           Container(
             color: Colors.white,
             width: double.infinity,
@@ -20,7 +19,6 @@ class DoctorPage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                 child: Row(
                   children: [
-                    // Make icon clickable to navigate back
                     GestureDetector(
                       onTap: () {
                         Navigator.pop(context);
@@ -57,7 +55,6 @@ class DoctorPage extends StatelessWidget {
               ),
             ),
           ),
-          // Content with improved gradient background
           Expanded(
             child: Container(
               decoration: BoxDecoration(
@@ -75,7 +72,6 @@ class DoctorPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Functional search bar with TextField
                   Container(
                     width: 330,
                     height: 45,
