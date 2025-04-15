@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'rating_widget.dart';
+import 'patient_info_screen.dart';
 
 // The modified HomeCareScreen with tappable practitioners
 class HomeCareScreen extends StatelessWidget {
@@ -519,7 +520,11 @@ class PractitionerProfileScreen extends StatelessWidget {
                             Expanded(
                               child: ElevatedButton(
                                 onPressed: () {
-                                  // Continue action
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) =>  PatientInfoScreen()),
+                                          );
+
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.blue,

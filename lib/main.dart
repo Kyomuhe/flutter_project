@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart'; 
 import 'Pages/home_page.dart';
 import './Components/cart.dart'; 
+import 'models/patient_registration_model.dart';
+
 
 // In main.dart
 void main() {
@@ -9,6 +11,8 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => CartProvider()),
+        ChangeNotifierProvider(create: (context) => PatientRegistrationModel()),
+
       ],
       child: const MyApp(),
     ),
