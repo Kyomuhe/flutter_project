@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'messages.dart';
+import 'call_flow.dart';
 
 class DoctorDetailsPage extends StatelessWidget {
   final String name;
@@ -300,6 +301,14 @@ child: GestureDetector(
                 ),
                 const SizedBox(width: 15),
                 Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const CallFlow()),
+                        );
+                        },
+
                   child: Container(
                     height: 42,
                     decoration: BoxDecoration(
@@ -321,6 +330,7 @@ child: GestureDetector(
                         ),
                       ),
                     ),
+                  ),
                   ),
                 ),
               ],
