@@ -352,7 +352,7 @@ class AppointmentSuccessScreen extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                     child: Center(
-                      child: Image.asset('verified-fill.png'),
+                      child: Image.asset('assets/verified-fill.png'),
                     ),
                   ),
                   // Scattered dots - position and size variations

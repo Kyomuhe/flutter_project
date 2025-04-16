@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class PatientAppointments extends StatelessWidget {
+  const PatientAppointments({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +10,7 @@ class MyApp extends StatelessWidget {
       title: 'Appointment App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        fontFamily: 'SF Pro Display',
+        fontFamily: 'poppins',
         scaffoldBackgroundColor: const Color(0xFFF0F9F9),
       ),
       home: const AppointmentsScreen(),
@@ -37,6 +33,16 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
     AppointmentModel(
       doctorName: 'Dr. Abaasa Hellon',
       specialization: 'Dermatologist',
+      date: '13th June 2024',
+      time: '18:35pm',
+      duration: '02:31',
+      status: 'finished',
+      rating: 4,
+      hasCancellationOption: false,
+    ),
+    AppointmentModel(
+      doctorName: 'Dr. Abaasa Hellon',
+      specialization: 'Dermatologist',
       date: '13th June 2025',
       time: '18:35pm',
       duration: '04:31',
@@ -46,12 +52,11 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
     AppointmentModel(
       doctorName: 'Dr. Abaasa Hellon',
       specialization: 'Dermatologist',
-      date: '13th June 2024',
+      date: '13th June 2025',
       time: '18:35pm',
-      duration: '02:31',
-      status: 'finished',
-      rating: 5,
-      hasCancellationOption: false,
+      duration: '04:31',
+      status: 'active',
+      hasCancellationOption: true,
     ),
   ];
 
@@ -81,14 +86,15 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                     'Appointments',
                     style: TextStyle(
                       fontSize: 18,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w500,
+                      color: Color(0xFF2D2D2D),
                     ),
                   ),
                 ],
               ),
             ),
             
-            // Blue info card
+            // Blue info card - Modified to place "3" above "Pending"
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 16),
               padding: const EdgeInsets.all(16),
@@ -100,12 +106,13 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                 children: [
                   Expanded(
                     child: Column(
-                      crossAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
                           'Hello, Abaasa,',
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Color(0xFFDDD9D9),
+                            fontWeight: FontWeight.w400,
                             fontSize: 14,
                           ),
                         ),
@@ -114,26 +121,26 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                           'Easily manage appointments',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                         const SizedBox(height: 8),
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.2),
+                            color: Colors.white,
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: const Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Icon(Icons.calendar_today, color: Colors.white, size: 14),
+                              Icon(Icons.calendar_today, color: Colors.blue, size: 14),
                               SizedBox(width: 4),
                               Text(
                                 'Aug 08, 3:00pm',
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: Colors.blue,
                                   fontSize: 12,
                                 ),
                               ),
@@ -143,30 +150,35 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                       ],
                     ),
                   ),
-                  Container(
-                    width: 30,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        '3',
-                        style: TextStyle(
-                          color: Colors.blue,
-                          fontWeight: FontWeight.bold,
+                  // Modified to place "3" above "Pending"
+                  Column(
+                    children: [
+                      Container(
+                        width: 30,
+                        height: 30,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            '3',
+                            style: TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  const Text(
-                    'Pending',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 12,
-                    ),
+                      const SizedBox(height: 4),
+                      const Text(
+                        'Pending',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -175,10 +187,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
             // Tab selector
             Container(
               margin: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: const Color(0xFFECECEC),
-                borderRadius: BorderRadius.circular(25),
-              ),
+              height: 40,
               child: Row(
                 children: tabs.map((tab) {
                   final isSelected = selectedTab == tab;
@@ -190,10 +199,12 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                         });
                       },
                       child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
                         decoration: BoxDecoration(
-                          color: isSelected ? Colors.white : Colors.transparent,
-                          borderRadius: BorderRadius.circular(25),
+                          color: isSelected ? const Color(0xFFE5EBFC) : Colors.transparent,
+                          border: isSelected 
+                            ? Border.all(color: Colors.blue, width: 1.5)
+                            : null,
+                          borderRadius: BorderRadius.circular(8),
                         ),
                         child: Center(
                           child: Text(
@@ -218,16 +229,15 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                 itemCount: filteredAppointments.length,
                 itemBuilder: (context, index) {
                   final appointment = filteredAppointments[index];
-                  return AppointmentCard(
+                  return UpdatedAppointmentCard(
                     appointment: appointment,
                     onCancelTap: () {
-                      showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                      // Navigate to full page cancellation screen instead of showing bottom sheet
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const CancellationReasonPage(),
                         ),
-                        builder: (context) => const CancellationReasonSheet(),
                       );
                     },
                   );
@@ -266,11 +276,11 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
   }
 }
 
-class AppointmentCard extends StatelessWidget {
+class UpdatedAppointmentCard extends StatelessWidget {
   final AppointmentModel appointment;
   final VoidCallback onCancelTap;
 
-  const AppointmentCard({
+  const UpdatedAppointmentCard({
     super.key,
     required this.appointment,
     required this.onCancelTap,
@@ -282,93 +292,104 @@ class AppointmentCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 5),
-          ),
-        ],
+        border: Border.all(color: const Color(0xFFD9D9D9), width: 1.5),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Doctor image
-          CircleAvatar(
-            radius: 24,
-            backgroundColor: Colors.grey.shade200,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(24),
-              child: Image.network(
-                'https://via.placeholder.com/48',
-                width: 48,
-                height: 48,
-                fit: BoxFit.cover,
+          // Doctor info column with image on top - RESTRUCTURED
+          Column(
+            children: [
+              // Doctor image - Using asset image
+              ClipRRect(
+                borderRadius: BorderRadius.circular(24),
+                child: Image.asset(
+                  'assets/profile.png',
+                  width: 48,
+                  height: 48,
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-          ),
-          const SizedBox(width: 12),
-          
-          // Appointment details
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  appointment.doctorName,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16,
-                  ),
-                ),
-                Text(
-                  appointment.specialization,
-                  style: TextStyle(
-                    color: Colors.grey.shade600,
-                    fontSize: 14,
-                  ),
-                ),
-                if (appointment.status == 'finished' && appointment.rating != null)
-                  Row(
-                    children: List.generate(
-                      5,
-                      (index) => Icon(
-                        Icons.star,
-                        size: 14,
-                        color: index < (appointment.rating ?? 0) ? Colors.amber : Colors.grey.shade300,
+              const SizedBox(height: 12),
+              
+              // Doctor info below profile picture
+              SizedBox(
+                width: 100, // Adjust width as needed
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      appointment.doctorName,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14,
+                        color: Color(0xFF2D2D2D),
                       ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                  ),
-                if (appointment.hasCancellationOption)
-                  TextButton(
-                    onPressed: onCancelTap,
-                    style: TextButton.styleFrom(
-                      padding: EdgeInsets.zero,
-                      minimumSize: const Size(0, 0),
-                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    ),
-                    child: Text(
-                      'Cancel Appointment',
-                      style: TextStyle(
-                        color: Colors.red.shade400,
+                    Text(
+                      appointment.specialization,
+                      style: const TextStyle(
+                        color: Color(0xFF677294),
                         fontSize: 12,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
-                  ),
-              ],
-            ),
+                    if (appointment.status == 'finished' && appointment.rating != null)
+                      Row(
+                        children: [
+                          Text(
+                            'Rate ',
+                            style: TextStyle(
+                              color: Colors.amber.shade700,
+                              fontSize: 12,
+                            ),
+                          ),
+                          ...List.generate(
+                            5,
+                            (index) => Icon(
+                              Icons.star,
+                              size: 12,
+                              color: index < (appointment.rating ?? 0) ? Colors.amber : Colors.grey.shade300,
+                            ),
+                          ),
+                        ],
+                      ),
+                    // Add Cancel Appointment option for active appointments
+                    if (appointment.hasCancellationOption)
+                      TextButton(
+                        onPressed: onCancelTap,
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          minimumSize: const Size(0, 0),
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        ),
+                        child: Text(
+                          'Cancel Appointment',
+                          style: TextStyle(
+                            color: Colors.red.shade400,
+                            fontSize: 10,
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ],
           ),
           
-          // Time and actions
+          const Spacer(),
+          
+          // Right column with time and action button
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
+              // Time display
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
-                  color: Colors.blue.shade50,
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Text(
@@ -376,39 +397,47 @@ class AppointmentCard extends StatelessWidget {
                   style: const TextStyle(
                     color: Colors.blue,
                     fontWeight: FontWeight.w600,
-                    fontSize: 14,
+                    fontSize: 20,
                   ),
                 ),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 2),
+              
+              // Time info
               Row(
                 children: [
-                  const Icon(Icons.access_time, size: 14, color: Colors.grey),
+                  const Icon(Icons.access_time, size: 14, color: Colors.blue),
                   const SizedBox(width: 4),
                   Text(
                     appointment.time,
-                    style: TextStyle(
-                      color: Colors.grey.shade600,
-                      fontSize: 12,
+                    style: const TextStyle(
+                      color: Color(0xFF2D2D2D),
+                      fontWeight: FontWeight.w400,
+                      fontSize: 16,
                     ),
                   ),
                 ],
               ),
               const SizedBox(height: 4),
+              
+              // Date info
               Row(
                 children: [
-                  const Icon(Icons.calendar_today, size: 14, color: Colors.grey),
+                  const Icon(Icons.calendar_today, size: 14, color: Colors.blue),
                   const SizedBox(width: 4),
                   Text(
                     appointment.date,
-                    style: TextStyle(
-                      color: Colors.grey.shade600,
-                      fontSize: 12,
+                    style: const TextStyle(
+                      color: Color(0xFF2D2D2D),
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 10),
+              
+              // Action button 
               ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
@@ -434,14 +463,15 @@ class AppointmentCard extends StatelessWidget {
   }
 }
 
-class CancellationReasonSheet extends StatefulWidget {
-  const CancellationReasonSheet({super.key});
+// Full page cancellation with updated radio buttons design
+class CancellationReasonPage extends StatefulWidget {
+  const CancellationReasonPage({super.key});
 
   @override
-  State<CancellationReasonSheet> createState() => _CancellationReasonSheetState();
+  State<CancellationReasonPage> createState() => _CancellationReasonPageState();
 }
 
-class _CancellationReasonSheetState extends State<CancellationReasonSheet> {
+class _CancellationReasonPageState extends State<CancellationReasonPage> {
   String? selectedReason;
   final List<String> reasons = [
     'Weather conditions',
@@ -453,125 +483,149 @@ class _CancellationReasonSheetState extends State<CancellationReasonSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      height: MediaQuery.of(context).size.height * 0.5,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Let\'s know the main reason why your cancelling this appointment.',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-            ),
+    return Scaffold(
+      backgroundColor: const Color(0xFFF0F9F9),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: const CircleAvatar(
+            backgroundColor: Color(0xFFEEEEEE),
+            radius: 18,
+            child: Icon(Icons.arrow_back_ios_new, size: 16, color: Colors.black),
           ),
-          const SizedBox(height: 20),
-          
-          // Reason options
-          Column(
-            children: reasons.asMap().entries.map((entry) {
-              final index = entry.key;
-              final reason = entry.value;
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 12),
-                child: InkWell(
-                  onTap: () {
-                    setState(() {
-                      selectedReason = reason;
-                    });
-                  },
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 20,
-                        height: 20,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: selectedReason == reason ? Colors.blue : Colors.grey,
-                            width: 2,
+          onPressed: () => Navigator.pop(context),
+        ),
+        title: const Text(
+          'Appointments',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+            color: Colors.black,
+          ),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Let\'s know the main reason why your cancelling this appointment.',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            const SizedBox(height: 20),
+            
+            // Reason options - updated to match design
+            Column(
+              children: reasons.asMap().entries.map((entry) {
+                final reason = entry.value;
+                final bool isSelected = selectedReason == reason;
+                
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: InkWell(
+                    onTap: () {
+                      setState(() {
+                        selectedReason = reason;
+                      });
+                    },
+                    child: Row(
+                      children: [
+                        // Updated radio button design
+                        Container(
+                          width: 24,
+                          height: 24,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: isSelected ? Colors.blue : const Color(0xFFD9D9D9),
+                              width: 2,
+                            ),
                           ),
-                          color: selectedReason == reason ? Colors.blue : Colors.white,
+                          child: isSelected
+                              ? Center(
+                                  child: Container(
+                                    width: 12,
+                                    height: 12,
+                                    decoration: const BoxDecoration(
+                                      color: Colors.blue,
+                                      shape: BoxShape.circle,
+                                    ),
+                                  ),
+                                )
+                              : null,
                         ),
-                        child: selectedReason == reason
-                            ? const Center(
-                                child: Icon(
-                                  Icons.check,
-                                  size: 12,
-                                  color: Colors.white,
-                                ),
-                              )
-                            : null,
-                      ),
-                      const SizedBox(width: 12),
-                      Text(
-                        reason,
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            }).toList(),
-          ),
-          
-          // Other reason text field
-          if (selectedReason == 'Others')
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey.shade300),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Others reasons',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey,
+                        const SizedBox(width: 12),
+                        Text(
+                          reason,
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black,
+                            fontWeight: isSelected ? FontWeight.w500 : FontWeight.normal,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  TextField(
-                    controller: otherReasonController,
-                    decoration: const InputDecoration(
-                      hintText: 'Other reasons, specify',
-                      hintStyle: TextStyle(color: Colors.grey),
-                      border: InputBorder.none,
-                    ),
-                  ),
-                ],
-              ),
+                );
+              }).toList(),
             ),
-          
-          const Spacer(),
-          
-          // Confirm button
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
-                padding: const EdgeInsets.symmetric(vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+            
+            // Other reason text field - updated styling
+            if (selectedReason == 'Others')
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey.shade300),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  
+                  children: [
+                    TextField(
+                      controller: otherReasonController,
+                      decoration: const InputDecoration(
+                        hintText: 'Other reasons, specify',
+                        hintStyle: TextStyle(color: Colors.grey),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              child: const Text(
-                'Confirm & Cancel',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600,
+            
+            const Spacer(),
+            
+            // Confirm button
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: const Text(
+                  'Confirm & Cancel',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
