@@ -100,6 +100,7 @@ flutter:
     - assets/flags/uganda.png
     - assets/doctor.PNG
     - assets/patient.png
+    - assets/verified-fill.png
 
 
 

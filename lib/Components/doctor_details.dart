@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'messages.dart';
 import 'call_flow.dart';
+import 'appointment.dart';
 
 class DoctorDetailsPage extends StatelessWidget {
   final String name;
@@ -339,12 +340,21 @@ child: GestureDetector(
           
           // Make an Appointment button
           Container(
-            height: 47.5,
+                        height: 47.5,
             margin: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: const Color(0xFF0085FF),
               borderRadius: BorderRadius.circular(6),
             ),
+
+            child: GestureDetector(
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Appointment()),
+    );
+  },
+
             child: const Center(
               child: Text(
                 'Make an Appointment',
@@ -356,6 +366,7 @@ child: GestureDetector(
 
                 ),
               ),
+            ),
             ),
           ),
         ],
