@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'rating_widget.dart';
 import '../pages/product_detail.dart';
 import 'cart.dart';
-import '../models/product.dart'; // Import the consolidated Product model
+import '../models/product.dart';
+import 'notification_service.dart'; // Import the notification service
 
 class ProductCard extends StatelessWidget {
   final Product product;
@@ -190,33 +191,31 @@ class ProductCard extends StatelessWidget {
                       ),
                     ),
                     
-                    // Add to cart button
-TextButton(
-  onPressed: () {
-    // Add to cart functionality
-    cartProvider.addItem(product);
-    
-    // Navigate directly to cart page instead of showing a snackbar
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => CartPage(cartProvider: cartProvider),
-      ),
-    );
-  },
-  style: TextButton.styleFrom(
-    padding: const EdgeInsets.symmetric(horizontal: 8),
-    minimumSize: Size.zero,
-    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-  ),
-  child: const Text(
-    'Add to Cart',
-    style: TextStyle(
-      fontSize: 11,
-      color: Color(0xFF3B82F6),
-    ),
-  ),
-),                  ],
+                    TextButton(
+                      onPressed: () {
+                        // Add to cart functionality
+                        cartProvider.addItem(product);
+                        
+                        // Show success notification
+                        NotificationService().showSuccessNotification(
+                          context,
+                          "${product.name} added to cart!",
+                        );
+                      },
+                      style: TextButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        minimumSize: Size.zero,
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                      child: const Text(
+                        'Add to Cart',
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: Color(0xFF3B82F6),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

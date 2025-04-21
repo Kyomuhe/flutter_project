@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../Components/product_card.dart';
 import '../models/product.dart'; 
 import '../Components/cart.dart';
+import '../Components/notification_service.dart'; // Import notification components
 import 'package:provider/provider.dart';
 
 class ProductPage extends StatelessWidget {
@@ -99,77 +100,103 @@ class ProductPage extends StatelessWidget {
     
     
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  height: 32,
-                  width:344,
-                  margin: const EdgeInsets.only(left: 20, right: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Recommended for you',
-                        style: TextStyle(
-                          color: Color(0xFF2D2D2D),
-                          fontSize: 16,
-                        ),
-                      ),
-                      
-                    
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => AllProductsPage(
-                                products: products,
-                                cartProvider: cartProvider, // Passing cartProvider 
+      body: Stack(
+        children: [
+          // Main content
+          SafeArea(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: 32,
+                      width:344,
+                      margin: const EdgeInsets.only(left: 20, right: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            'Recommended for you',
+                            style: TextStyle(
+                              color: Color(0xFF2D2D2D),
+                              fontSize: 16,
+                            ),
+                          ),
+                          
+                        
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => AllProductsPage(
+                                    products: products,
+                                    cartProvider: cartProvider, // Passing cartProvider 
+                                  ),
+                                ),
+                              );
+                            },
+                            child: const Text(
+                              'Explore all',
+                              style: TextStyle(
+                                color: Colors.blue,
+                                fontSize: 14,
                               ),
                             ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    
+                    SizedBox(
+                      height: 278, 
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: products.length > 4 ? 4 : products.length, // Show only first 4 products
+                        separatorBuilder: (context, index) => const SizedBox(width: 16),
+                        itemBuilder: (context, index) {
+                          return ProductCard(
+                            product: products[index],
+                            onProductSelect: (productId) {
+                              // This callback is now handled in the ProductCard itself
+                              print('Selected product ID: $productId');
+                            },
+                            cartProvider: cartProvider, // Pass the cart provider to the ProductCard
                           );
                         },
-                        child: const Text(
-                          'Explore all',
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 14,
-                          ),
-                        ),
                       ),
-                    ],
-                  ),
+                    ),
+                    
+                  ],
                 ),
-                const SizedBox(height: 16),
-                
-                SizedBox(
-                  height: 278, 
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: products.length > 4 ? 4 : products.length, // Show only first 4 products
-                    separatorBuilder: (context, index) => const SizedBox(width: 16),
-                    itemBuilder: (context, index) {
-                      return ProductCard(
-                        product: products[index],
-                        onProductSelect: (productId) {
-                          // This callback is now handled in the ProductCard itself
-                          print('Selected product ID: $productId');
-                        },
-                        cartProvider: cartProvider, // Pass the cart provider to the ProductCard
-                      );
-                    },
-                  ),
-                ),
-                
-              ],
+              ),
             ),
           ),
-        ),
+          
+          // Floating Cart Button - show only if cart has items
+          if (cartProvider.itemCount > 0)
+            Positioned(
+              bottom: 20,
+              left: 0,
+              right: 0,
+              child: Center(
+                child: FloatingCartButton(
+                  cartProvider: cartProvider,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CartPage(cartProvider: cartProvider),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+        ],
       ),
     );
   }
@@ -183,66 +210,92 @@ class AllProductsPage extends StatelessWidget {
   const AllProductsPage({
     Key? key, 
     required this.products,
-    required this.cartProvider, // Mark as required
+    required this.cartProvider,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // No app bar - custom header instead
-      body: SafeArea(
-        child: Column(
-          children: [
-            // Custom header with back button and "All products" text
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-              child: Row(
-                children: [
-                  // Back button
-                  GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: const Icon(Icons.arrow_back, color: Colors.blue),
+      body: Stack(
+        children: [
+          // Main content
+          SafeArea(
+            child: Column(
+              children: [
+                // Custom header with back button and "All products" text
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+                  child: Row(
+                    children: [
+                      // Back button
+                      GestureDetector(
+                        onTap: () => Navigator.pop(context),
+                        child: const Icon(Icons.arrow_back, color: Colors.blue),
+                      ),
+                      const SizedBox(width: 16),
+                      // "All products" text
+                      const Text(
+                        'All products',
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(width: 16),
-                  // "All products" text
-                  const Text(
-                    'All products',
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                ),
+                
+                // Grid of products
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: GridView.builder(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 16.0,
+                        mainAxisSpacing: 16.0,
+                        childAspectRatio: 0.55, // Adjusted to match product card proportions
+                      ),
+                      itemCount: products.length,
+                      itemBuilder: (context, index) {
+                        return ProductCard(
+                          product: products[index],
+                          onProductSelect: (productId) {
+                            print('Selected product ID: $productId');
+                          },
+                          cartProvider: cartProvider, // Pass the cartProvider
+                        );
+                      },
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            
-            // Grid of products
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 16.0,
-                    mainAxisSpacing: 16.0,
-                    childAspectRatio: 0.55, // Adjusted to match product card proportions
-                  ),
-                  itemCount: products.length,
-                  itemBuilder: (context, index) {
-                    return ProductCard(
-                      product: products[index],
-                      onProductSelect: (productId) {
-                        print('Selected product ID: $productId');
-                      },
-                      cartProvider: cartProvider, // Pass the cartProvider
+          ),
+          
+          // Floating Cart Button - show only if cart has items
+          if (cartProvider.itemCount > 0)
+            Positioned(
+              bottom: 20,
+              left: 0,
+              right: 0,
+              child: Center(
+                child: FloatingCartButton(
+                  cartProvider: cartProvider,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CartPage(cartProvider: cartProvider),
+                      ),
                     );
                   },
                 ),
               ),
             ),
-          ],
-        ),
+        ],
       ),
     );
   }
