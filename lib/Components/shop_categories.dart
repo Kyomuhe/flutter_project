@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'category_grid.dart';
 
 class ShopCategoriesWidget extends StatelessWidget {
   const ShopCategoriesWidget({Key? key}) : super(key: key);
@@ -35,22 +36,30 @@ class ShopCategoriesWidget extends StatelessWidget {
               ),
               
               // Right text - Explore all
-              Container(
-                width: 58,
-                height: 23,
-                alignment: Alignment.center,
-                child: const Text(
-                  'Explore all',
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w400,
-                    fontSize: 12,
-                    height: 30 / 12, // lineHeight / fontSize
-                    letterSpacing: -0.21,
-                    color: const Color(0xFF0085FF),
-                  ),
-                ),
-              ),
+GestureDetector(
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => CategoryGridLayout()), // Replace with your actual page class
+    );
+  },
+  child: Container(
+    width: 58,
+    height: 23,
+    alignment: Alignment.center,
+    child: const Text(
+      'Explore all',
+      style: TextStyle(
+        fontFamily: 'Poppins',
+        fontWeight: FontWeight.w400,
+        fontSize: 12,
+        height: 30 / 12,
+        letterSpacing: -0.21,
+        color: Color(0xFF0085FF),
+      ),
+    ),
+  ),
+),
             ],
           ),
         ),

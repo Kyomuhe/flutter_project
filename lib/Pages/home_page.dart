@@ -10,6 +10,8 @@ import 'package:provider/provider.dart';
 import '../Components/cart.dart';
 import 'patient_appointments.dart';
 import 'products_page.dart';
+import 'profile.dart';
+import '../Components/side_menu_drawer.dart'; // Import the side menu
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -20,13 +22,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   
   // List of pages for the bottom navigation
   final List<Widget> _pages = [
     const HomeContent(),
     const PatientAppointments(),
-    const ProductPage(),
-    const ProductPage(),
+    const FeatureNotImplemented(featureName: "Messages"),
+    const FeatureNotImplemented(featureName: "Notifications"),
   ];
 
   void _onItemTapped(int index) {
@@ -38,44 +41,119 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: const SideMenuDrawer(), // Add the side menu drawer
       body: _pages[_selectedIndex], // Show the selected page
-      bottomNavigationBar: SizedBox(
-        height: 58,
-        child: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
+      bottomNavigationBar: Container(
+        height: 70, // Increased height to accommodate image and text
+        decoration: const BoxDecoration(
+          color: Color(0xFF0085FF),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _buildNavItem(0, 'home1.png', 'Home'),
+              _buildNavItem(1, 'records.png', 'E-Records'),
+              _buildNavItem(2, 'messages.png', 'Messages'),
+              _buildNavItem(3, 'bell.png', 'Notification'),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNavItem(int index, String imageName, String label) {
+    bool isSelected = _selectedIndex == index;
+    return GestureDetector(
+      onTap: () => _onItemTapped(index),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            'assets/$imageName',
+            width: 24,
+            height: 24,
+            color: isSelected ? Colors.white : Colors.white.withOpacity(0.6),
+          ),
+          const SizedBox(height: 4),
+          Container(
+            height: 15, // Specified height for label
+            child: Text(
+              label,
+              style: TextStyle(
+                color: isSelected ? Colors.white : Colors.white.withOpacity(0.6),
+                fontSize: 12,
+                fontFamily: 'Poppins',
+              ),
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.note_alt),
-              label: 'Notes',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// Placeholder widget for features not yet implemented
+class FeatureNotImplemented extends StatelessWidget {
+  final String featureName;
+  
+  const FeatureNotImplemented({Key? key, required this.featureName}) : super(key: key);
+  
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0xB861CEFF), // bluish with opacity
+            Colors.white,      // transition to white
+            Colors.white,      // solid white
+          ],
+          stops: [0.0, 0.3, 1.0],
+        ),
+      ),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(
+              Icons.construction,
+              size: 80,
+              color: Color(0xFF0085FF),
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.message),
-              label: 'Messages',
+            const SizedBox(height: 20),
+            Text(
+              "$featureName Feature",
+              style: const TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF0085FF),
+              ),
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.notifications),
-              label: 'Notifications',
+            const SizedBox(height: 10),
+            const Text(
+              "This feature is not yet implemented.\nWe'll be adding it soon!",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 16,
+                color: Colors.black54,
+              ),
             ),
           ],
-          currentIndex: _selectedIndex,
-          selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.white.withOpacity(0.6),
-          backgroundColor: const Color(0xFF0085FF),
-          type: BottomNavigationBarType.fixed,
-          elevation: 0,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          onTap: _onItemTapped,
         ),
       ),
     );
   }
 }
 
-// Create a separate HomeContent widget to hold existing home page content
 class HomeContent extends StatelessWidget {
   const HomeContent({Key? key}) : super(key: key);
 
@@ -83,9 +161,9 @@ class HomeContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<String> bannerImages = [
       'assets/swipper1.png',
-      'assets/swipper1.png',
-      'assets/swipper1.png',
-      'assets/swipper1.png',
+      'assets/swiper2.PNG',
+      'assets/swiper3.PNG',
+      'assets/swiper4.PNG',
       'assets/swipper1.png',
     ];
 
@@ -116,10 +194,16 @@ class HomeContent extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Image.asset(
-                              'assets/home.png',
-                              width: 20,
-                              height: 18,
+                            GestureDetector(
+                              onTap: () {
+                                // Open the drawer when home.png is tapped
+                                Scaffold.of(context).openDrawer();
+                              },
+                              child: Image.asset(
+                                'assets/home.png',
+                                width: 20,
+                                height: 18,
+                              ),
                             ),
                             const SizedBox(width: 8),
                             RichText(
@@ -189,18 +273,26 @@ class HomeContent extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 16),
-                        Container(
-                          width: 46,
-                          height: 46,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: Colors.white,
-                              width: 1.6,
-                            ),
-                            image: const DecorationImage(
-                              image: AssetImage('assets/profile.png'),
-                              fit: BoxFit.cover,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const ProfileScreen()),
+                            );
+                          },
+                          child: Container(
+                            width: 46,
+                            height: 46,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: Colors.white,
+                                width: 1.6,
+                              ),
+                              image: const DecorationImage(
+                                image: AssetImage('assets/profile.png'),
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),

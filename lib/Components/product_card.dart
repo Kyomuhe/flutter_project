@@ -191,7 +191,6 @@ class ProductCard extends StatelessWidget {
                     ),
                     
                     // Add to cart button
-// Update this in product_card.dart, inside the ProductCard build method
 TextButton(
   onPressed: () {
     // Add to cart functionality

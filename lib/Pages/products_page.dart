@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 
 class ProductPage extends StatelessWidget {
   const ProductPage({super.key});
-  // Create sample product data with 8 products
   static List<Product> getSampleProducts(){
     return [
       Product(
@@ -95,7 +94,7 @@ class ProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final products = getSampleProducts();
-    // Get the CartProvider from the widget tree
+    // Getting the CartProvider from the widget tree
     final cartProvider = Provider.of<CartProvider>(context, listen: true);
     
     
@@ -109,20 +108,20 @@ class ProductPage extends StatelessWidget {
               children: [
                 Container(
                   height: 32,
+                  width:344,
                   margin: const EdgeInsets.only(left: 20, right: 20),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // "Recommended for you" text
                       const Text(
                         'Recommended for you',
                         style: TextStyle(
                           color: Color(0xFF2D2D2D),
-                          fontSize: 20,
+                          fontSize: 16,
                         ),
                       ),
                       
-                      // "Explore all" text - clickable with navigation
+                    
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -130,7 +129,7 @@ class ProductPage extends StatelessWidget {
                             MaterialPageRoute(
                               builder: (context) => AllProductsPage(
                                 products: products,
-                                cartProvider: cartProvider, // Pass cartProvider here
+                                cartProvider: cartProvider, // Passing cartProvider 
                               ),
                             ),
                           );
@@ -148,9 +147,8 @@ class ProductPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 
-                // Container with fixed height to display products in a single row
                 SizedBox(
-                  height: 278, // The exact height of our ProductCard
+                  height: 278, 
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     itemCount: products.length > 4 ? 4 : products.length, // Show only first 4 products
@@ -180,7 +178,7 @@ class ProductPage extends StatelessWidget {
 // Page that displays all products in a grid with two columns
 class AllProductsPage extends StatelessWidget {
   final List<Product> products;
-  final CartProvider cartProvider; // Add this parameter
+  final CartProvider cartProvider; 
 
   const AllProductsPage({
     Key? key, 

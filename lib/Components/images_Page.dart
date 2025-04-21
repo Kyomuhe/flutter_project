@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
-// Main component that displays the horizontal scrollable list
 class ShopByConditionComponent extends StatelessWidget {
   const ShopByConditionComponent({Key? key}) : super(key: key);
 
-  // Sample data for demonstration - replace with your actual items
   static final List<Map<String, String>> conditionItems = [
     {'image': 'assets/diabetes.png', 'label': 'Diabetes'},
     {'image': 'assets/condition.png', 'label': 'Heart Care'},

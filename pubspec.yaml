@@ -56,6 +56,9 @@ flutter:
     - assets/lab.png
     - assets/nurse.png
     - assets/swipper1.png
+    - assets/swiper2.PNG
+    - assets/swiper3.PNG
+    - assets/swiper4.PNG
     - assets/app.png
     - assets/precious.png
     - assets/care.png
@@ -101,6 +104,21 @@ flutter:
     - assets/doctor.PNG
     - assets/patient.png
     - assets/verified-fill.png
+    - assets/plan.png
+    - assets/transaction.png
+    - assets/pay_later.png
+    - assets/payment.png
+    - assets/help.png
+    - assets/terms.png
+    - assets/three.png
+    - assets/two.png
+    - assets/one.png
+    - assets/inquire.png
+    - assets/home1.png
+    - assets/records.png
+    - assets/messages.png
+    - assets/bell.png
+    - assets/wallets.png
 
 
 
