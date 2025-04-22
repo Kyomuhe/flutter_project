@@ -11,7 +11,7 @@ import '../Components/cart.dart';
 import 'patient_appointments.dart';
 import 'products_page.dart';
 import 'profile.dart';
-import '../Components/side_menu_drawer.dart'; // Import the side menu
+import '../Components/side_menu_drawer.dart'; 
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -42,10 +42,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      drawer: const SideMenuDrawer(), // Add the side menu drawer
-      body: _pages[_selectedIndex], // Show the selected page
+      drawer: const SideMenuDrawer(), 
+      body: _pages[_selectedIndex], 
       bottomNavigationBar: Container(
-        height: 70, // Increased height to accommodate image and text
+        height: 70, 
         decoration: const BoxDecoration(
           color: Color(0xFF0085FF),
         ),
@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
           ),
           const SizedBox(height: 4),
           Container(
-            height: 15, // Specified height for label
+            height: 15, 
             child: Text(
               label,
               style: TextStyle(
@@ -196,7 +196,6 @@ class HomeContent extends StatelessWidget {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                // Open the drawer when home.png is tapped
                                 Scaffold.of(context).openDrawer();
                               },
                               child: Image.asset(
